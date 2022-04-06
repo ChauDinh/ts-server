@@ -16,6 +16,7 @@ require("reflect-metadata");
 const apollo_server_express_1 = require("apollo-server-express");
 const express_1 = __importDefault(require("express"));
 const type_graphql_1 = require("type-graphql");
+const typeorm_1 = require("typeorm");
 let RecipeResolver = class RecipeResolver {
     async greeting() {
         return 'Hello, World!';
@@ -31,6 +32,12 @@ RecipeResolver = __decorate([
     (0, type_graphql_1.Resolver)()
 ], RecipeResolver);
 const main = async () => {
+    const AppDataSource = new typeorm_1.DataSource(require("../ormconfig.json"));
+    AppDataSource.initialize()
+        .then(() => {
+        console.log("Data Source has been initialized!!!");
+    })
+        .catch(err => console.error(err));
     const schema = await (0, type_graphql_1.buildSchema)({
         resolvers: [RecipeResolver]
     });

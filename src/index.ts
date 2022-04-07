@@ -4,6 +4,7 @@ import Express from "express";
 import { buildSchema } from "type-graphql";
 import { DataSource } from "typeorm"
 import { RegisterResolver } from "./resolvers/user/Register";
+import { BookResolver } from "./resolvers/book/BookResolver";
 
 const main = async () => {
 
@@ -15,10 +16,10 @@ const main = async () => {
     .catch(err => console.error(err))
 
   const schema = await buildSchema({
-    resolvers: [RegisterResolver]
+    resolvers: [RegisterResolver, BookResolver]
   })
 
-  const apolloServer = new ApolloServer({schema});
+  const apolloServer = new ApolloServer({ schema });
   await apolloServer.start();
 
   const app = Express();

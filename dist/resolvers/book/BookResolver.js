@@ -11,45 +11,38 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var __param = (this && this.__param) || function (paramIndex, decorator) {
     return function (target, key) { decorator(target, key, paramIndex); }
 };
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.RegisterResolver = void 0;
+exports.BookResolver = void 0;
 const type_graphql_1 = require("type-graphql");
-const bcryptjs_1 = __importDefault(require("bcryptjs"));
-const User_1 = require("../../entities/User");
-const RegisterInput_1 = require("./register/RegisterInput");
-let RegisterResolver = class RegisterResolver {
-    async greeting() {
-        return 'Hello, World!';
+const Book_1 = require("../../entities/Book");
+const BookInput_1 = require("./create/BookInput");
+let BookResolver = class BookResolver {
+    async getAll() {
+        return await Book_1.Book.find();
     }
-    async register({ email, password, firstName, lastName }) {
-        const hashedPassword = await bcryptjs_1.default.hash(password, 12);
-        const user = await User_1.User.create({
-            firstName,
-            lastName,
-            email,
-            password: hashedPassword
+    async createBook({ title, author }) {
+        const book = await Book_1.Book.create({
+            title,
+            author
         }).save();
-        return user;
+        return book;
     }
 };
 __decorate([
-    (0, type_graphql_1.Query)(() => String),
+    (0, type_graphql_1.Query)(() => [Book_1.Book]),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", []),
     __metadata("design:returntype", Promise)
-], RegisterResolver.prototype, "greeting", null);
+], BookResolver.prototype, "getAll", null);
 __decorate([
-    (0, type_graphql_1.Mutation)(() => User_1.User),
+    (0, type_graphql_1.Mutation)(() => Book_1.Book),
     __param(0, (0, type_graphql_1.Arg)("input")),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [RegisterInput_1.RegisterInput]),
+    __metadata("design:paramtypes", [BookInput_1.BookInput]),
     __metadata("design:returntype", Promise)
-], RegisterResolver.prototype, "register", null);
-RegisterResolver = __decorate([
+], BookResolver.prototype, "createBook", null);
+BookResolver = __decorate([
     (0, type_graphql_1.Resolver)()
-], RegisterResolver);
-exports.RegisterResolver = RegisterResolver;
-//# sourceMappingURL=Register.js.map
+], BookResolver);
+exports.BookResolver = BookResolver;
+//# sourceMappingURL=BookResolver.js.map

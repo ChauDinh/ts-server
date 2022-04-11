@@ -2,13 +2,12 @@ import "reflect-metadata";
 import { ApolloServer } from "apollo-server-express";
 import Express from "express";
 import { buildSchema } from "type-graphql";
-import { DataSource } from "typeorm"
 import { RegisterResolver } from "./resolvers/user/Register";
 import { BookResolver } from "./resolvers/book/BookResolver";
+import { AppDataSource } from "./app-data-source";
 
 const main = async () => {
 
-  const AppDataSource = new DataSource(require("../ormconfig.json"));
   AppDataSource.initialize()
     .then(() => {
       console.log("Data Source has been initialized!!!");

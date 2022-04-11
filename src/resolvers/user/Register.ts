@@ -5,7 +5,7 @@ import { RegisterInput } from "./register/RegisterInput";
 
 @Resolver()
 export class RegisterResolver {
-  @Query(() => String)
+  @Query(() => String, {name: "hello"})
   async greeting() {
     return 'Hello, World!'
   }

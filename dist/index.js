@@ -7,12 +7,11 @@ require("reflect-metadata");
 const apollo_server_express_1 = require("apollo-server-express");
 const express_1 = __importDefault(require("express"));
 const type_graphql_1 = require("type-graphql");
-const typeorm_1 = require("typeorm");
 const Register_1 = require("./resolvers/user/Register");
 const BookResolver_1 = require("./resolvers/book/BookResolver");
+const app_data_source_1 = require("./app-data-source");
 const main = async () => {
-    const AppDataSource = new typeorm_1.DataSource(require("../ormconfig.json"));
-    AppDataSource.initialize()
+    app_data_source_1.AppDataSource.initialize()
         .then(() => {
         console.log("Data Source has been initialized!!!");
     })

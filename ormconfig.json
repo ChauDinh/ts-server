@@ -8,3 +8,4 @@
   "logging": true,
   "entities": ["dist/entities/*.*"]
 }
+

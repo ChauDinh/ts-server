@@ -16,9 +16,10 @@ exports.BookResolver = void 0;
 const type_graphql_1 = require("type-graphql");
 const Book_1 = require("../../entities/Book");
 const BookInput_1 = require("./create/BookInput");
+const BookRepository_1 = require("../../repository/BookRepository");
 let BookResolver = class BookResolver {
     async getAll() {
-        return await Book_1.Book.find();
+        return BookRepository_1.BookRepository.getAllBooks();
     }
     async createBook({ title, author }) {
         const book = await Book_1.Book.create({

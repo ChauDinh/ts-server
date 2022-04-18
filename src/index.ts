@@ -4,11 +4,12 @@ import Express from "express";
 import { buildSchema } from "type-graphql";
 import { RegisterResolver } from "./resolvers/user/Register";
 import { BookResolver } from "./resolvers/book/BookResolver";
-import { AppDataSource } from "./app-data-source";
+import DataSourceSingleton from "./app-data-source";
+
 
 const main = async () => {
-
-  AppDataSource.initialize()
+  const dataSource = DataSourceSingleton.getInstance();
+  dataSource.initialize()
     .then(() => {
       console.log("Data Source has been initialized!!!");
     })

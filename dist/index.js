@@ -9,9 +9,10 @@ const express_1 = __importDefault(require("express"));
 const type_graphql_1 = require("type-graphql");
 const Register_1 = require("./resolvers/user/Register");
 const BookResolver_1 = require("./resolvers/book/BookResolver");
-const app_data_source_1 = require("./app-data-source");
+const app_data_source_1 = __importDefault(require("./app-data-source"));
 const main = async () => {
-    app_data_source_1.AppDataSource.initialize()
+    const dataSource = app_data_source_1.default.getInstance();
+    dataSource.initialize()
         .then(() => {
         console.log("Data Source has been initialized!!!");
     })
